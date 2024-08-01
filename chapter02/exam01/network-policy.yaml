@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-pods-to-redis-backend
+  namespace: guestbook
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+      tier: backend
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-redis-backend
+  namespace: guestbook
+spec:
+  podSelector: 
+    matchLabels:
+      app: redis
+      tier: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: guestbook
+          tier: frontend
+    - namespaceSelector:
+        matchLabels:
+          name: good-test
+    ports:
+    - port: 6379
+      protocol: TCP
