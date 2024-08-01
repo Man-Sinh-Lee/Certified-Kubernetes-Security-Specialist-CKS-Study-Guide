@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: ingress
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: accounting-secret
+  namespace: ingress
+type: kubernetes.io/tls
+data:
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFekNDQWZ1Z0F3SUJBZ0lVUEVrZmJMc0U1cXZsT3VUSW4wMFBFb3BqeGJzd0RRWUpLb1pJaHZjTkFRRUwKQlFBd0dURVhNQlVHQTFVRUF3d09ZV05qYjNWdWRHbHVaeTUwYkhNd0hoY05NalF3T0RBeE1qRXdOelEwV2hjTgpNalF3T0RNeE1qRXdOelEwV2pBWk1SY3dGUVlEVlFRRERBNWhZMk52ZFc1MGFXNW5MblJzY3pDQ0FTSXdEUVlKCktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCQUwxOWdtb2xVMmZVZWhjbkpUZlRjZlRsdUkyV1JYSXYKTVBhZXVTZUFDdjAyN0dtUmVKSzl2VzFhY092RllYTkRyRVRVdEpycmVvejIxcWoreGZQTmt5TUxyNEJlSGdUTQpEN1ZNMWpQYnRXNjZ2TytsbkNXZDJOTHh5OHA5bVBadFdpL1VSSHAyUzhPWlZhdThaZlhadXZDZzNhZkN1M0hoCmg1K1l1WE51Szd1L0xXYXloa0UyN24vbms2T29qTjRoaTRMWlZQMGN0MjVpRElQY2hUcnlCSFZNbW5wRTZGMzIKK2xnb0lVSkVYd1dJSHRQcUJlSklSQktKSnJyQUhCaGQ3VkpYUlhmN25WSWpjK2s5dmg3T1FYbllxb3hhNnJPbApDNDZ2bS9Qd2xTQUwxa1ZFOXdVWm1xdEVHSEE2V1lrOHlYQ3pINHQ4SysvRWV4bXIrSmFqakdNQ0F3RUFBYU5UCk1GRXdIUVlEVlIwT0JCWUVGTEJiZ0pMcU1IVlo4MUNoSHlweUU5UXRKSTN4TUI4R0ExVWRJd1FZTUJhQUZMQmIKZ0pMcU1IVlo4MUNoSHlweUU5UXRKSTN4TUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3RFFZSktvWklodmNOQVFFTApCUUFEZ2dFQkFEbXJzcVNOYWdwZnpwMFVLZmd0VFhsNEcvcnBKVGxhUHZvZFVtS0hVNkVSRUg4alpVUkhMYkxNCnVGQjhERy9FN1NWUWtQRk81THg0Nm5Cdjh5US90cit6d3QwVExOa0NJcXo1SitFSDl2L1MyM3VWS2VnTmdnRkEKTEtZaFBZekxqVmRvRGZ0S3BqMXRldEErb3Q3VWFZUGU5dmY2R256aW5TV3N2NzcwVDMzYUp6Um5taXc1VTB2eQorVEt2c1VHUmo5SnJNUXorODdBUXcxNEZJa25abzMxaFBRdE9id25aclZEVVNHNVMwakFRZ0FJaExNT0ticVdCCnJsb3U2djhkWk1GOW9CS0JhNktoL2dneXNuRzFwcHErQXB3ODQ3ZHNGVHFpVzBYVzFtN0JIcnFKZUVqbzNZa3MKc1hva1AySUptRHNsZEdlV2RxVlY4RXBLVmpMY1M2RT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  tls.key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRQzlmWUpxSlZObjFIb1gKSnlVMzAzSDA1YmlObGtWeUx6RDJucmtuZ0FyOU51eHBrWGlTdmIxdFduRHJ4V0Z6UTZ4RTFMU2E2M3FNOXRhbwovc1h6elpNakM2K0FYaDRFekErMVROWXoyN1Z1dXJ6dnBad2xuZGpTOGN2S2ZaajJiVm92MUVSNmRrdkRtVldyCnZHWDEyYnJ3b04ybndydHg0WWVmbUxsemJpdTd2eTFtc29aQk51NS81NU9qcUl6ZUlZdUMyVlQ5SExkdVlneUQKM0lVNjhnUjFUSnA2Uk9oZDl2cFlLQ0ZDUkY4RmlCN1Q2Z1hpU0VRU2lTYTZ3QndZWGUxU1YwVjMrNTFTSTNQcApQYjRlemtGNTJLcU1XdXF6cFF1T3I1dno4SlVnQzlaRlJQY0ZHWnFyUkJod09sbUpQTWx3c3grTGZDdnZ4SHNaCnEvaVdvNHhqQWdNQkFBRUNnZ0VBRjh1NUl1ZEpFQkxvdWh1YVd1WmN1eXBXQU1ITU9zaWVWM29iT2xDa0VLUmoKRCtiS3czSzhaUTBrZlJjdVk3RXQ0djdySjBGSEJJakM4RG4rVmQyTkNxdWZBSG5SUHp6NUJBV0FLTWNBZzhWRAprTHkxWFN2elhKb3N3MkwrWUlQZS9YNmtrdFJrTTA0QUtpN2dodjB1c3FVZzhMNU5sOEdBckpRYlJkbWgrRk9VCllpRzhJTTVPNWZ2SHJKU3ZuVFhtTFJZR2lZQjA4anZRSnhBbk9LQzhBUnNVSDdZbnFyQW5Cdkc1Skl1YkpvVzgKc0VXWTVodDU5aU1hZ3hGWDBTbWdxOGZnMndJL1dtYWpoalN4M3hrektTVHUxa2h6NmdPWVc2NUZMVkxQcktNbwp2azNITFZWZ2FZMmJyemJvQSthS1RRc2I4NVptb0tFd1B6Qy9YcWFXSVFLQmdRRGpEaEQvUGdNRUphVWNzbE1vCjgrMU9VUkxNYndSY0xiUlRLWVI3dnUwa3JyMEJvNUNZTm80UVdieW5DYkVEWTk2YUVtTXlJVmZlSHNvcGRkbVEKeFdsVVhaQjB0VFF4WkkxZ2V2YzQrUjkxcGcrblA1RVpzcUNPK2Y4T0VGK09iRXl1aFZmbTAxWU93RGlZeTJvRgphcVdxMlo2U21MYXRuMENCN0NIZWREc2xld0tCZ1FEVnBZVkdlNEdRZ3AwZUNBZU95Q0NaYkY5V0hjWEp0L243CnRJcDdUcHNvUWNTZ0I5ZTdFYlFpOGdRMEtaOGdGMWF0Y1NQL3Z3K2dVWWNhY09OMzVmcHpWaTdBUDBxOUdBUEIKeUhtbnppNGlpZy9QWUxmVXlNc3RxRFJhZzlMUW1HanpFc2FDSVpKWVlNOTlBVjJ5YUN0TkEwakcrRXdjdkNXaQpNYzBXSEFCY09RS0JnQXNwcCtCRWxqVmYvR3dhd0VmbEppZVJpTkVRTERDejlvZVlKUEZJZzdRbit4YlhpY1pSCitFNEplMkxpOFJidmxBUVRIMWxabGs1UFNUVWNuQ09uOFBPNjNkMC9BMS9pUjZrVW9vN2tnSTF5S3BiWVl6UFcKT2xxTkkrTDNIeHVMYTRHeEFJOVNtSXFGSE1NMlRQSVRPaTNhSVJlbjltTTJ6eDhVRXQ0eTdLMTlBb0dCQUxpNgpSNFJyNGRscnRpSnpXdVdRRU8vWGpvOU5hdWxCMURwWkhxd0RpWkREWFJucDdoUm4rRk9HNHkrZkZXR1FESGduCkxiTkNKbWErVjR6N014TkduTWtCS2FjOGtvanhyTDN2YzVFdWF5R2VNcEZpMVZCODFZRUN3VkhLVFl2alhFdGcKWHBmQ0kyR2JRNHlZazhWZzRKL1VTU2NSSmU1cW1EZW55K1prQzhPeEFvR0JBT0NaM290SkV4OEdQTmZKZUt2YwphaWEza2ovUXI1OTc3endwUjUzaC9tc3dYVHJZU0JpOUFtTnlwRXpWV0pDVDQvMTJVbjV5WkdGZkV5bUVXMVk3ClZKcVR1K2xrL1ZpUlRhbjg3NG1NZTR0a1BJdFJWR2NDVStrQjVzWnF6ZmZDVUNXVkdZaXdmV2k2WWZYSmJ3MDMKekdCVktEa2hJa1pONjNSQnFRMFo4OXBWCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+  namespace: ingress
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      volumes:
+        - name: share-volume
+          emptyDir: {}
+      initContainers:
+        - name: busybox
+          image: busybox
+          command:
+            [
+              "sh",
+              "-c",
+              'echo "<html><h1><span>bonjour de $HOSTNAME</span></h1></html>" >/data/html/index.html',
+            ]
+          volumeMounts:
+            - name: share-volume
+              mountPath: /data/html
+      containers:
+        - image: nginx:stable-alpine
+          name: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: share-volume
+              mountPath: /usr/share/nginx/html
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx
+  namespace: ingress
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+      nodePort: 30080
+  selector:
+    app: nginx
+  type: NodePort
+status:
+  loadBalancer: {}
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  creationTimestamp: null
+  name: accounting-ingress
+  namespace: ingress
+spec:
+  rules:
+  - host: accounting.internal.sredevops.xyz
+    http:
+      paths:
+      - backend:
+          service:
+            name: accounting-service
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - accounting.internal.sredevops.xyz
+    secretName: accounting-secret
+status:
+  loadBalancer: {}
