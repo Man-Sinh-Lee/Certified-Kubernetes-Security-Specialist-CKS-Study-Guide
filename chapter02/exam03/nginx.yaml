@@ -1,9 +1,18 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: ingress
+spec: {}
+status: {}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app: nginx
   name: nginx
+  namespace: ingress
 spec:
   replicas: 3
   selector:
@@ -25,7 +34,7 @@ spec:
             [
               "sh",
               "-c",
-              'echo "<html><h1><span>bonjour de $HOSTNAME</span></h1></html>" >/data/html/index.html',
+              'echo "<html><h1><span>$HOSTNAME is up and running</span></h1></html>" >/data/html/index.html',
             ]
           volumeMounts:
             - name: share-volume
@@ -45,15 +54,13 @@ metadata:
   creationTimestamp: null
   labels:
     app: nginx
-  name: nginx
+  name: accounting-service
+  namespace: ingress
 spec:
   ports:
     - port: 80
       protocol: TCP
       targetPort: 80
-      nodePort: 30080
   selector:
     app: nginx
-  type: NodePort
-status:
-  loadBalancer: {}
+  type: ClusterIP

@@ -1,0 +1,81 @@
+apiVersion: eksctl.io/v1alpha5
+availabilityZones:
+- us-east-1a
+- us-east-1b
+- us-east-1c
+cloudWatch:
+  clusterLogging: {}
+iam:
+  vpcResourceControllerPolicy: true
+  withOIDC: false
+kind: ClusterConfig
+kubernetesNetworkConfig:
+  ipFamily: IPv4
+managedNodeGroups:
+- amiFamily: AmazonLinux2
+  desiredCapacity: 3
+  disableIMDSv1: true
+  disablePodIMDS: false
+  iam:
+    withAddonPolicies:
+      albIngress: true
+      appMesh: true
+      appMeshPreview: false
+      autoScaler: true
+      awsLoadBalancerController: true
+      certManager: true
+      cloudWatch: true
+      ebs: true
+      efs: true
+      externalDNS: true
+      fsx: false
+      imageBuilder: true
+      xRay: false
+  instanceName: first-node-group
+  instanceSelector: {}
+  instanceType: t3.medium
+  labels:
+    alpha.eksctl.io/cluster-name: dev-eks-cluster
+    alpha.eksctl.io/nodegroup-name: first-node-group
+  maxSize: 9
+  minSize: 3
+  name: first-node-group
+  privateNetworking: true
+  # taint nodes so that application pods are
+  # not scheduled/executed until Cilium is deployed.
+  # Alternatively, see the note below.
+  # taints:
+  #  - key: "node.cilium.io/agent-not-ready"
+  #    value: "true"
+  #    effect: "NoExecute"  
+  releaseVersion: ""
+  securityGroups:
+    withLocal: null
+    withShared: null
+  ssh:
+    allow: false
+    enableSsm: true
+    publicKeyPath: ""
+  tags:
+    alpha.eksctl.io/nodegroup-name: first-node-group
+    alpha.eksctl.io/nodegroup-type: managed
+  volumeIOPS: 3000
+  volumeSize: 20
+  volumeThroughput: 125
+  volumeType: gp3
+metadata:
+  name: dev-eks-cluster
+  region: us-east-1
+  version: "1.30"
+privateCluster:
+  enabled: false
+  skipEndpointCreation: false
+vpc:
+  autoAllocateIPv6: false
+  cidr: 10.0.0.0/16
+  clusterEndpoints:
+    privateAccess: false
+    publicAccess: true
+  manageSharedNodeSecurityGroupRules: true
+  nat:
+    gateway: HighlyAvailable
